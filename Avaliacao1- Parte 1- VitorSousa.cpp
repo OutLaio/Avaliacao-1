@@ -10,6 +10,7 @@ typedef struct T_cliente {
     string CNH;
 }Cliente;
 
+// Função para incluir cliente
 void ler (Cliente *leitura_Cliente){
     cin.ignore();
     system("clear");
@@ -24,6 +25,7 @@ void ler (Cliente *leitura_Cliente){
 }
 
 
+//Função para excluir cliente
 void excluir_Cliente(vector<Cliente> listadeClientes){
     system("clear");
     if(listadeClientes.size()>0){
@@ -52,15 +54,25 @@ void excluir_Cliente(vector<Cliente> listadeClientes){
     }
     }
 
-void alterar_Cliente(vector<Cliente> listadeClientes){
-    system("clear: ");
-    if()
+// Função para alterar cliente
+void alterar_Cliente(vector<Cliente>& listadeClientes){
 
-
-
+    string CPF;
+    cout << "Digite o CPF do cliente que deseja alterar: ";
+    cin >> CPF;
+    for () {
+        if () {
+            
+            cout << "Cliente alterado com sucesso!" << endl;
+            return;
+        }
+    }
+    cout << "CPF não encontrado." << endl;
 }
 
 
+
+//Função para listar clientes
 void Listar_Clientes(vector<Cliente> ListadeClientes){
     system("clear");
     for (int i = 0; i < ListadeClientes.size(); i++){
@@ -72,7 +84,7 @@ void Listar_Clientes(vector<Cliente> ListadeClientes){
     
 }
 
-
+// Função para buscar CPF
 void buscar_CPF(vector<Cliente> ListadeClientes){
     system("clear");
     if(ListadeClientes.size()>0){
