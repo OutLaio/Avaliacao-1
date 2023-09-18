@@ -219,6 +219,28 @@ void listarClientes(){
         system(PAUSA);
     }
 }
+void localizarCliente(){
+    if(clientesLocadora.size() > 0){
+        string cpfLocalizar;
+        bool clienteEncontrado;
+
+        cout << "Digite o CPF: ";
+        cin >> cpfLocalizar;
+
+        for(size_t i=0; i<clientesLocadora.size(); i++){
+            if(clientesLocadora.at(i).cpf == cpfLocalizar){
+                clienteEncontrado = true;
+                cout << "CLIENTE:" << endl;
+                cout << clientesLocadora.at(i).cpf << " / "
+                << clientesLocadora.at(i).nome << " / " 
+                << clientesLocadora.at(i).dtNascimento << " / " 
+                << clientesLocadora.at(i).cnh << endl;
+                break;
+            }
+        }
+        if(!clienteEncontrado) cout << "AVISO: Cliente não encontrado. Verifique se digitou CPF corretamente." << endl;
+    } else cout << "AVISO: Nenhum cliente cadastrado." << endl;
+}
 void sistemaClientes(){
     int opcaoUsuario = 0;
     do{
@@ -245,7 +267,7 @@ void sistemaClientes(){
                 system(PAUSA);
                 break;
             case 5:
-                
+                localizarCliente();
                 system(PAUSA);
                 break;
             default:
@@ -253,6 +275,58 @@ void sistemaClientes(){
                 break;
         }
     }while(opcaoUsuario != 0);
+}
+void incluirVeiculo(){
+    VEICULO veiculo;
+    system(LIMPAR_TELA);
+    cout << "Digite o nº Renavan (somente nº): ";
+    cin >> veiculo.renavan;
+    cout << "Digite a Placa do Veiculo: ";
+    cin >> veiculo.placa_veiculo;
+    cout << "Digite a Data de Retirada: " << endl;
+    cout << "Dia: ";
+    cin >> veiculo.dataHoraRetirada.dia;
+    cout << "Mes: ";
+    cin >> veiculo.dataHoraRetirada.mes;
+    cout << "Ano: ";
+    cin >> veiculo.dataHoraRetirada.ano;
+    cout << "Hora: ";
+    cin >> veiculo.dataHoraRetirada.hora;
+    cout << "Minutos: ";
+    cin >> veiculo.dataHoraRetirada.minutos;
+    cout << "Digite a Data de Entrega: " << endl;
+    cout << "Dia: ";
+    cin >> veiculo.dataHoraEntrega.dia;
+    cout << "Mes: ";
+    cin >> veiculo.dataHoraEntrega.mes;
+    cout << "Ano: ";
+    cin >> veiculo.dataHoraEntrega.ano;
+    cout << "Hora: ";
+    cin >> veiculo.dataHoraEntrega.hora;
+    cout << "Minutos: ";
+    cin >> veiculo.dataHoraEntrega.minutos;
+    cout << "Digite o nome da Loja: ";
+    cin >> veiculo.lojaRetirada;
+    veiculosLocadora.push_back(veiculo);
+    cout << "AVISO: Veiculo cadastrado com sucesso!" << endl;
+}
+void excluirVeiculo(){
+    if(veiculosLocadora.size() > 0){
+        string cpfExcluir;
+        bool clienteEncontrado;
+
+        cout << "Digite o CPF: ";
+        cin >> cpfExcluir;
+
+        for(size_t i=0; i<clientesLocadora.size(); i++){
+            if(clientesLocadora.at(i).cpf == cpfExcluir){
+                clienteEncontrado = true;
+                clientesLocadora.erase(clientesLocadora.begin() + i);
+            }
+        }
+        if(clienteEncontrado) cout << "AVISO: Cliente excluido com sucesso!" << endl;
+        else cout << "AVISO: Cliente não encontrado. Verifique se digitou CPF corretamente." << endl;
+    } else cout << "AVISO: Nenhum cliente cadastrado." << endl;
 }
 void sistemaVeiculos(){
     int opcaoUsuario = 0;
@@ -264,18 +338,23 @@ void sistemaVeiculos(){
                 return;
                 break;
             case 1:
+                incluirVeiculo();
                 system(PAUSA);
                 break;
             case 2:
+                excluirVeiculo();
                 system(PAUSA);
                 break;
             case 3:
+                alterarVeiculo();
                 system(PAUSA);
                 break;
             case 4:
+                listarVeiculos();
                 system(PAUSA);
                 break;
             case 5:
+                localizarVeiculo();
                 system(PAUSA);
                 break;
             default:
