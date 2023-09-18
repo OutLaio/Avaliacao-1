@@ -201,6 +201,24 @@ void alterarCliente(){
         if(!clienteEncontrado) cout << "AVISO: Cliente não encontrado. Verifique se digitou CPF corretamente." << endl;
     } else cout << "AVISO: Nenhum cliente cadastrado." << endl;
 }
+void listarClientes(){
+    if(clientesLocadora.size() > 0){
+        system(LIMPAR_TELA);
+        cout << "Lista de Clientes:" << endl;
+        cout << endl << "CPF / NOME / DATA DE NASCIMENTO / CNH" << endl;
+        for(size_t i=0; i<clientesLocadora.size(); i++){
+            cout << clientesLocadora.at(i).cpf << " / "
+            << clientesLocadora.at(i).nome << " / " 
+            << clientesLocadora.at(i).dtNascimento << " / " 
+            << clientesLocadora.at(i).cnh << endl;
+        }
+        cout << endl;
+        system(PAUSA);
+    } else{
+        cout << "Nenhum cliente cadastrado!" << endl;
+        system(PAUSA);
+    }
+}
 void sistemaClientes(){
     int opcaoUsuario = 0;
     do{
@@ -227,6 +245,7 @@ void sistemaClientes(){
                 system(PAUSA);
                 break;
             case 5:
+                
                 system(PAUSA);
                 break;
             default:
