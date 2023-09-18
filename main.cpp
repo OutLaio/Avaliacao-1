@@ -312,21 +312,21 @@ void incluirVeiculo(){
 }
 void excluirVeiculo(){
     if(veiculosLocadora.size() > 0){
-        string cpfExcluir;
-        bool clienteEncontrado;
+        string placaExcluir;
+        bool veiculoEncontrado;
 
-        cout << "Digite o CPF: ";
-        cin >> cpfExcluir;
+        cout << "Digite a Placa: ";
+        cin >> placaExcluir;
 
-        for(size_t i=0; i<clientesLocadora.size(); i++){
-            if(clientesLocadora.at(i).cpf == cpfExcluir){
-                clienteEncontrado = true;
-                clientesLocadora.erase(clientesLocadora.begin() + i);
+        for(size_t i=0; i<veiculosLocadora.size(); i++){
+            if(veiculosLocadora.at(i).placa_veiculo == placaExcluir){
+                veiculoEncontrado = true;
+                veiculosLocadora.erase(veiculosLocadora.begin() + i);
             }
         }
-        if(clienteEncontrado) cout << "AVISO: Cliente excluido com sucesso!" << endl;
-        else cout << "AVISO: Cliente não encontrado. Verifique se digitou CPF corretamente." << endl;
-    } else cout << "AVISO: Nenhum cliente cadastrado." << endl;
+        if(veiculoEncontrado) cout << "AVISO: Veiculo excluido com sucesso!" << endl;
+        else cout << "AVISO: Veiculo não encontrado. Verifique se digitou a placa corretamente." << endl;
+    } else cout << "AVISO: Nenhum veiculo cadastrado." << endl;
 }
 void sistemaVeiculos(){
     int opcaoUsuario = 0;
