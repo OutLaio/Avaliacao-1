@@ -121,7 +121,8 @@ void incluirCliente(){
     cout << "Digite o CPF (somente nº): ";
     cin >> cliente.cpf;
     cout << "Digite o Nome: ";
-    cin >> cliente.nome;
+    cin.ignore();
+    getline(cin, cliente.nome);
     cout << "Digite a Data de Nascimento (xx/xx/xxxx): ";
     cin >> cliente.dtNascimento;
     cout << "Digite a CNH: ";
@@ -174,7 +175,8 @@ void modificarCliente(int indexCliente){
                 break;
             case 2:
                 cout << "Digite o novo Nome: ";
-                cin >> novoDado;
+                cin.ignore();
+                getline(cin, novoDado);
                 clientesLocadora.at(indexCliente).cpf = novoDado;
                 break;
             case 3:
@@ -315,7 +317,8 @@ void incluirVeiculo(){
     cout << "Minutos: ";
     cin >> veiculo.dataHoraEntrega.minutos;
     cout << "Digite o nome da Loja: ";
-    cin >> veiculo.lojaRetirada;
+    cin.ignore();
+    getline(cin, veiculo.lojaRetirada);
     veiculosLocadora.push_back(veiculo);
     cout << "AVISO: Veiculo cadastrado com sucesso!" << endl;
 }
@@ -395,7 +398,8 @@ void modificarVeiculo(int indexVeiculo){
                 break;
             case 5:
                 cout << "Digite a nova loja retirada: ";
-                cin >> veiculosLocadora.at(indexVeiculo).lojaRetirada;
+                cin.ignore();
+                getline(cin, veiculosLocadora.at(indexVeiculo).lojaRetirada);
                 break;
             default:
                 break;
