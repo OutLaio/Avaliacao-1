@@ -5,6 +5,7 @@
 #include<string>
 #include<vector>
 #include "Data.hpp"
+#include "Utilitarios.hpp"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ int dispMenuCliente(void){
     int op = 0;
     Data data = getDataAtual();
 
-    system("clear");
+    limpaTela();
     cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
     data.toString();
     cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
@@ -24,9 +25,10 @@ int dispMenuCliente(void){
         << "#0. Sair" << endl << endl
         << "> #";
     cin >> op;
+    limpaBuffer();
         
     while (op < 0 || op > 5){
-        system("clear");
+        limpaTela();
         cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
         data.toString();
         cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
@@ -39,6 +41,7 @@ int dispMenuCliente(void){
             << endl << "Digite uma opcao valida!" << endl
             << "> #";
         cin >> op;
+        limpaBuffer();
     }
     
     return op;
@@ -48,7 +51,7 @@ int dispMenuVeiculo(void){
     int op = 0;
     Data data = getDataAtual();
 
-    system("clear");
+    limpaTela();
     cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
     data.toString();
     cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
@@ -60,9 +63,10 @@ int dispMenuVeiculo(void){
         << "#0. Sair" << endl << endl
         << "> #";
     cin >> op;
+    limpaBuffer();
         
     while (op < 0 || op > 5){
-        system("clear");
+        limpaTela();
         cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
         data.toString();
         cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
@@ -75,6 +79,7 @@ int dispMenuVeiculo(void){
             << endl << "Digite uma opcao valida!" << endl
             << "> #";
         cin >> op;
+        limpaBuffer();
     }
     
     return op;
@@ -84,7 +89,7 @@ int dispAlteraVeiculo(void){
     int op = 0;
     Data data = getDataAtual();
 
-    system("clear");
+    limpaTela();
     cout << endl << "O que deseja alterar?" << endl << endl
         << "#1. Renavam" << endl
         << "#2. Data e hora de retirada" << endl
@@ -93,9 +98,10 @@ int dispAlteraVeiculo(void){
         << "#0. Sair" << endl << endl
         << "> #";
     cin >> op;
+    limpaBuffer();
         
     while (op < 0 || op > 4){
-        system("clear");
+        limpaTela();
         cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
         data.toString();
         cout << endl << "O que deseja alterar?" << endl << endl
@@ -107,6 +113,7 @@ int dispAlteraVeiculo(void){
             << endl << "Digite uma opcao valida!" << endl
             << "> #";
         cin >> op;
+        limpaBuffer();
     }
     
     return op;
@@ -116,7 +123,7 @@ int dispAlteraCliente(void){
     int op = 0;
     Data data = getDataAtual();
 
-    system("clear");
+    limpaTela();
     cout << endl << "O que deseja alterar?" << endl << endl
         << "#1. Nome" << endl
         << "#2. Data de nascimento" << endl
@@ -124,9 +131,10 @@ int dispAlteraCliente(void){
         << "#0. Sair" << endl << endl
         << "> #";
     cin >> op;
+    limpaBuffer();
         
     while (op < 0 || op > 3){
-        system("clear");
+        limpaTela();
         cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
         data.toString();
         cout << endl << "O que deseja alterar?" << endl << endl
@@ -137,6 +145,7 @@ int dispAlteraCliente(void){
             << endl << "Digite uma opcao valida!" << endl
             << "> #";
         cin >> op;
+        limpaBuffer();
     }
     
     return op;

@@ -4,6 +4,7 @@
 #include<iostream>
 #include<string>
 #include <ctime>
+#include "Utilitarios.hpp"
 
 using namespace std;
  
@@ -71,9 +72,9 @@ typedef struct T_data{
                     return false;
                 break;
             default:
-                return true;
                 break;
         }
+        return true;
     }
 
     bool isHora(){
@@ -138,6 +139,7 @@ void setData(Data *nova_data){
     cin >> nova_data->mes;
     cout << "Digite o ano: ";
     cin >> nova_data->ano;
+    limpaBuffer();
     return;
 }
 
@@ -146,6 +148,7 @@ void setHora(Data *nova_hora){
     cin >> nova_hora->hora;
     cout << "Digite os minutos (apenas dois numeros): ";
     cin >> nova_hora->min;
+    limpaBuffer();
     return;
 }
 

@@ -5,13 +5,13 @@
 #include "Data.hpp"
 #include "Menu.hpp"
 #include "Cliente.hpp"
+#include "Utilitarios.hpp"
 
 using namespace std;
 
 int main(){
     int op;
     vector<Cliente> lista;
-    Cliente cliente;
 
     do{
         op = dispMenuCliente();
