@@ -31,15 +31,26 @@ struct VEICULO{
     string lojaRetirada;
 };
 
-// Variaveis globais;
-vector<CLIENTE> clientesLocadora;
-vector<VEICULO> veiculosLocadora;
-
 int menu(bool ehCliente);
 int menuModulo();
 void incluirCliente();
+void excluirCliente();
+void modificarCliente(int indexCliente);
+void alterarCliente();
+void listarClientes();
+void localizarCliente();
 void sistemaClientes();
+void incluirVeiculo();
+void excluirVeiculo();
+void modificarVeiculo(int indexVeiculo);
+void alterarVeiculo();
+void listarVeiculos();
+void localizarVeiculo();
 void sistemaVeiculos();
+
+// Variaveis globais;
+vector<CLIENTE> clientesLocadora;
+vector<VEICULO> veiculosLocadora;
 
 int main(){
     int opcaoUsuario = 0;
@@ -213,10 +224,8 @@ void listarClientes(){
             << clientesLocadora.at(i).cnh << endl;
         }
         cout << endl;
-        system(PAUSA);
     } else{
         cout << "Nenhum cliente cadastrado!" << endl;
-        system(PAUSA);
     }
 }
 void localizarCliente(){
@@ -328,6 +337,137 @@ void excluirVeiculo(){
         else cout << "AVISO: Veiculo não encontrado. Verifique se digitou a placa corretamente." << endl;
     } else cout << "AVISO: Nenhum veiculo cadastrado." << endl;
 }
+void modificarVeiculo(int indexVeiculo){
+    int opcaoUsuario = 0;
+    do{
+        system(LIMPAR_TELA);
+        cout << "Escolha um opção para alterar: " << endl;
+        cout << "1. Nº Renavan" << endl;
+        cout << "2. Placa do Veiculo" << endl;
+        cout << "3. Data Retirada" << endl;
+        cout << "4. Data Entrega" << endl;
+        cout << "5. Loja Retirada" << endl;
+        cout << "0. Sair" << endl << "> ";
+        cin >> opcaoUsuario;
+        
+        if(opcaoUsuario < 0 || opcaoUsuario > 5){
+            cout << "AVISO: Opção inválida!" << endl;
+            system(PAUSA);
+        }
+        
+        string novoDado;
+        switch(opcaoUsuario){
+            case 0:
+                break;
+            case 1:
+                cout << "Digite o novo nº Renavan: ";
+                cin >> veiculosLocadora.at(indexVeiculo).renavan;
+                break;
+            case 2:
+                cout << "Digite a nova placa: ";
+                cin >> veiculosLocadora.at(indexVeiculo).placa_veiculo;
+                break;
+            case 3:
+                cout << "Digite a nova Data de Retirada: ";
+                cout << "Dia: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraRetirada.dia;
+                cout << "Mes: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraRetirada.mes;
+                cout << "Ano: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraRetirada.ano;
+                cout << "Hora: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraRetirada.hora;
+                cout << "Minutos: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraRetirada.minutos;
+                break;
+            case 4:
+                cout << "Digite a nova Data de Entrega: ";
+                cout << "Dia: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraEntrega.dia;
+                cout << "Mes: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraEntrega.mes;
+                cout << "Ano: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraEntrega.ano;
+                cout << "Hora: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraEntrega.hora;
+                cout << "Minutos: ";
+                cin >> veiculosLocadora.at(indexVeiculo).dataHoraEntrega.minutos;
+                break;
+            case 5:
+                cout << "Digite a nova loja retirada: ";
+                cin >> veiculosLocadora.at(indexVeiculo).lojaRetirada;
+                break;
+            default:
+                break;
+        }
+        cout << endl << "Veiculo alterado com sucesso!";
+        system(PAUSA);
+    }while(opcaoUsuario != 0);
+}
+void alterarVeiculo(){
+    if(veiculosLocadora.size() > 0){
+        string placaAlterar;
+        bool veiculoEncontrado;
+
+        cout << "Digite a placa: ";
+        cin >> placaAlterar;
+
+        for(size_t i=0; i<veiculosLocadora.size(); i++){
+            if(veiculosLocadora.at(i).placa_veiculo == placaAlterar){
+                veiculoEncontrado = true;
+                modificarVeiculo(i);
+                break;
+            }
+        }
+        if(!veiculoEncontrado) cout << "AVISO: Veiculo não encontrado. Verifique se digitou a placa corretamente." << endl;
+    } else cout << "AVISO: Nenhum veiculo cadastrado." << endl;
+}
+void mostrarDataHora(DATA data){
+    cout << data.dia << "/" << data.mes << "/" << data.ano
+    << "(" << data.hora << ":" << data.minutos << ")";
+}
+void listarVeiculos(){
+    if(veiculosLocadora.size() > 0){
+        system(LIMPAR_TELA);
+        cout << "Lista de Veiculos:" << endl;
+        cout << endl << "Nº RENAVANA / PLACA / RETIRADA / ENTREGA / LOJA RETIRADA" << endl;
+        for(size_t i=0; i<veiculosLocadora.size(); i++){
+            cout << veiculosLocadora.at(i).renavan << " / "
+            << veiculosLocadora.at(i).placa_veiculo << " / "; 
+            mostrarDataHora(veiculosLocadora.at(i).dataHoraRetirada);
+            cout << " / ";
+            mostrarDataHora(veiculosLocadora.at(i).dataHoraEntrega);
+            cout << " / " << veiculosLocadora.at(i).lojaRetirada << endl;
+        }
+        cout << endl;
+    } else{
+        cout << "Nenhum veiculo cadastrado!" << endl;
+    }
+}
+void localizarVeiculo(){
+    if(veiculosLocadora.size() > 0){
+        string placaVeiculo;
+        bool veiculoEncontrado;
+
+        cout << "Digite a placa: ";
+        cin >> placaVeiculo;
+
+        for(size_t i=0; i<veiculosLocadora.size(); i++){
+            if(veiculosLocadora.at(i).placa_veiculo == placaVeiculo){
+                veiculoEncontrado = true;
+                cout << "VEICULO:" << endl;
+                cout << veiculosLocadora.at(i).renavan << " / "
+                << veiculosLocadora.at(i).placa_veiculo << " / "; 
+                mostrarDataHora(veiculosLocadora.at(i).dataHoraRetirada);
+                cout << " / ";
+                mostrarDataHora(veiculosLocadora.at(i).dataHoraEntrega);
+                cout << " / " << veiculosLocadora.at(i).lojaRetirada << endl;
+                break;
+            }
+        }
+        if(!veiculoEncontrado) cout << "AVISO: Veiculo não encontrado. Verifique se digitou a placa corretamente." << endl;
+    } else cout << "AVISO: Nenhum veiculo cadastrado." << endl;
+}
 void sistemaVeiculos(){
     int opcaoUsuario = 0;
     do{
@@ -361,5 +501,5 @@ void sistemaVeiculos(){
                 cout << "AVISO: Opção inválida!" << endl;
                 break;
         }
-    }while(opcaoUsuario < 0 || opcaoUsuario > 5);
+    }while(opcaoUsuario != 0);
 }
