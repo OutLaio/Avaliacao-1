@@ -102,6 +102,7 @@ int menuModulo(){
     int opcao = 0;
     do{
         system(LIMPAR_TELA);
+        cout << "BEM VINDO!" << endl;
         cout << "Escolha uma opção:" << endl;
         cout << "1. Clientes" << endl;
         cout << "2. Veiculos" << endl;
