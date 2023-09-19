@@ -21,8 +21,8 @@ int dispMenuCliente(void){
     Data data = getDataAtual();
 
     limpaTela();
-    cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
-    data.toString();
+    cout << "********* LocaFINA S/A *********" << endl;
+    cout << "\t" << data.toString() << endl;
     cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
         << "#1. Incluir um novo cliente" << endl
         << "#2. Excluir um cliente" << endl
@@ -36,8 +36,8 @@ int dispMenuCliente(void){
         
     while (op < 0 || op > 5){
         limpaTela();
-        cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
-        data.toString();
+        cout << "********* LocaFINA S/A *********" << endl;
+        cout << "\t" << data.toString() << endl;
         cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
             << "#1. Incluir um novo cliente" << endl
             << "#2. Excluir um cliente" << endl
@@ -64,8 +64,8 @@ int dispMenuVeiculo(void){
     Data data = getDataAtual();
 
     limpaTela();
-    cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
-    data.toString();
+    cout << "********* LocaFINA S/A *********" << endl;
+    cout << "\t" << data.toString() << endl;
     cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
         << "#1. Incluir um novo veiculo" << endl
         << "#2. Excluir um veiculo" << endl
@@ -79,8 +79,8 @@ int dispMenuVeiculo(void){
         
     while (op < 0 || op > 5){
         limpaTela();
-        cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
-        data.toString();
+        cout << "********* LocaFINA S/A *********" << endl;
+        cout << "\t" << data.toString() << endl;
         cout << endl << "Seja bem vindo(a)! O que deseja?" << endl << endl
             << "#1. Incluir um novo veiculo" << endl
             << "#2. Excluir um veiculo" << endl
@@ -104,7 +104,6 @@ int dispMenuVeiculo(void){
 */
 int dispAlteraVeiculo(void){
     int op = 0;
-    Data data = getDataAtual();
 
     limpaTela();
     cout << endl << "O que deseja alterar?" << endl << endl
@@ -120,7 +119,6 @@ int dispAlteraVeiculo(void){
     while (op < 0 || op > 4){
         limpaTela();
         cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
-        data.toString();
         cout << endl << "O que deseja alterar?" << endl << endl
             << "#1. Renavam" << endl
             << "#2. Data e hora de retirada" << endl
@@ -143,7 +141,6 @@ int dispAlteraVeiculo(void){
 */
 int dispAlteraCliente(void){
     int op = 0;
-    Data data = getDataAtual();
 
     limpaTela();
     cout << endl << "O que deseja alterar?" << endl << endl
@@ -158,7 +155,6 @@ int dispAlteraCliente(void){
     while (op < 0 || op > 3){
         limpaTela();
         cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
-        data.toString();
         cout << endl << "O que deseja alterar?" << endl << endl
             << "#1. Nome" << endl
             << "#2. Data de nascimento" << endl
