@@ -7,11 +7,16 @@
 #include "Utilitarios.hpp"
 
 using namespace std;
- 
+
+// Esta biblioteca foi criada para conter funções relacionadas à manipulação de datas
+
+// Definiu-se a struct para uma data contendo os atributos necessários a ela, além de algumas funções próprias da struct. 
 typedef struct T_data{
     int dia, mes, ano;
     int hora = -1, min = -1;
 
+    /*  A função toString retorna uma string com a data formatada (Ex: 19/09/2023)
+    */
     string toString(){
         string data = "";
 
@@ -27,6 +32,8 @@ typedef struct T_data{
         return data;
     }
 
+    /*  A função anoEntre calcula e retorna os anos completos entre duas datas.
+    */
     int anoEntre(T_data dt){
         int k = this->ano-dt.ano;
         if(k < 0){
@@ -44,6 +51,8 @@ typedef struct T_data{
         return k;
     }
 
+    /*  A função isData verifica se a data é valida e retorna true, caso contrário retorna false.
+    */
     bool isData(){
         if (this->dia < 1 || this->dia > 31 || this->mes < 1 || this->mes > 12)
             return false;
@@ -77,6 +86,8 @@ typedef struct T_data{
         return true;
     }
 
+    /*  A função isHora verifica se a hora é valida e retorna true, caso contrário retorna false.
+    */
     bool isHora(){
         if(this->hora > 23 || this->hora < 0 || this->min > 59 || this->min < 0)
             return false;
@@ -84,6 +95,8 @@ typedef struct T_data{
             return true;
     }
 
+    /*  A função diaDaSemana calcula e retorna um número entre 0 e 6 correspondente ao dia da semana.
+    */
     int diaDaSemana(){
         int formula, dia_semana;
         int c_dia = this->dia, c_mes = this->mes, c_ano = this->ano;
@@ -104,6 +117,8 @@ typedef struct T_data{
         return dia_semana;
     }
 
+    /*  A função getHora retorna uma string com a hora formatada (Ex: 12:00)
+    */
     string getHora(){
         string horario = "";
 
@@ -120,6 +135,8 @@ typedef struct T_data{
 
 }Data;
 
+/*  A função getDataAtual coleta a data atual e a retorna.
+*/
 Data getDataAtual(){
     Data data;
     time_t tempo_atual = time(NULL);
@@ -131,7 +148,8 @@ Data getDataAtual(){
     return data;
 }
 
-
+/*  A função setData solicita do usuário um dia, mes e ano e armazena essa data.
+*/
 void setData(Data *nova_data){
     cout << "Digite o dia: ";
     cin >> nova_data->dia;
@@ -143,6 +161,8 @@ void setData(Data *nova_data){
     return;
 }
 
+/*  A função setHora solicita do usuário uma hora e minuto e armazena esse horario.
+*/
 void setHora(Data *nova_hora){
     cout << "Digite a hora (apenas dois numeros): ";
     cin >> nova_hora->hora;

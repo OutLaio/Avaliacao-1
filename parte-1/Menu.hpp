@@ -9,6 +9,13 @@
 
 using namespace std;
 
+// Esta biblioteca foi criada para conter funções relacionadas à manipulação de menu
+
+/*  A função dispMenuCliente imprime na tela do usuário as opções disponíveis relacionadas ao cliente
+    e solicita que o usuário escolha uma, caso o usuário digite uma opção não disponível é solicitado
+    novamente ao usuário que escolha uma opção disponível, ao informar uma das opções a função retorna
+    a escolha do usuário.
+*/
 int dispMenuCliente(void){
     int op = 0;
     Data data = getDataAtual();
@@ -47,6 +54,11 @@ int dispMenuCliente(void){
     return op;
 }
 
+/*  A função dispMenuVeiculo imprime na tela do usuário as opções disponíveis relacionadas ao veículo
+    e solicita que o usuário escolha uma, caso o usuário digite uma opção não disponível é solicitado
+    novamente ao usuário que escolha uma opção disponível, ao informar uma das opções a função retorna
+    a escolha do usuário.
+*/
 int dispMenuVeiculo(void){
     int op = 0;
     Data data = getDataAtual();
@@ -85,6 +97,11 @@ int dispMenuVeiculo(void){
     return op;
 }
 
+/*  A função dispAlteraVeiculo imprime na tela do usuário as opções disponíveis relacionadas a alteração de veículo
+    e solicita que o usuário escolha uma, caso o usuário digite uma opção não disponível é solicitado
+    novamente ao usuário que escolha uma opção disponível, ao informar uma das opções a função retorna
+    a escolha do usuário.
+*/
 int dispAlteraVeiculo(void){
     int op = 0;
     Data data = getDataAtual();
@@ -119,6 +136,11 @@ int dispAlteraVeiculo(void){
     return op;
 }
 
+/*  A função dispAlteraCliente imprime na tela do usuário as opções disponíveis relacionadas a alteração de cliente
+    e solicita que o usuário escolha uma, caso o usuário digite uma opção não disponível é solicitado
+    novamente ao usuário que escolha uma opção disponível, ao informar uma das opções a função retorna
+    a escolha do usuário.
+*/
 int dispAlteraCliente(void){
     int op = 0;
     Data data = getDataAtual();
