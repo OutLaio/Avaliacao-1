@@ -5,13 +5,11 @@
 #include<string>
 #include <vector>
 #include "Data.hpp"
-#include "Menu.hpp"
 #include "Utilitarios.hpp"
 
 using namespace std;
 
 // Esta biblioteca foi criada para conter funções relacionadas à manipulação dos veículos
-
 
 // Definiu-se a struct para um veículo contendo os atributos necessários a ele, além de algumas funções próprias da struct.
 typedef struct T_veiculo{
@@ -34,7 +32,7 @@ typedef struct T_veiculo{
             << "Data e hora da entrega (prevista): " << this->Data_Hora_Entrega.getHora()
             << " " << this->Data_Hora_Entrega.toString() << endl
             << "Loja de retirada: " << this->Loja_Retirada << endl;
-        getchar();
+        pausa_tela();
     }
 
     /*  A função dispListaVeiculo quando executada ira imprimir para o usuário os dados 
@@ -110,7 +108,7 @@ void setVeiculo(vector<Veiculo> *lista){
     limpaTela();
     cout << "********* Cadastro de Veiculo *********" << endl << endl;
     cout << "Veiculo cadastrado com sucesso!" << endl;
-    getchar();
+    pausa_tela();
 }
 
 /*  A função indexVeiculo executa uma busca no vetor de veículos por uma determinada placa,
@@ -124,9 +122,8 @@ int indexVeiculo(string Placa, vector<Veiculo> lista){
         }
     }
     limpaTela();
-    cout << "Placa informada nao encontrada!" << endl
-         << "(Pressione qualquer tecla para continuar...)";
-    getchar();
+    cout << "Placa informada nao encontrada!" << endl;
+    pausa_tela();
     return -1;
 }
 
@@ -152,9 +149,46 @@ void deleteVeiculo(vector<Veiculo> *lista){
     if(toupper(op) == 'S'){
         (*lista).erase((*lista).begin()+idVeiculo);
         cout << "Veiculo removido com sucesso!";
-        getchar();
+        pausa_tela();
     }
     return;
+}
+
+/*  A função dispAlteraVeiculo imprime na tela do usuário as opções disponíveis relacionadas a alteração de veículo
+    e solicita que o usuário escolha uma, caso o usuário digite uma opção não disponível é solicitado
+    novamente ao usuário que escolha uma opção disponível, ao informar uma das opções a função retorna
+    a escolha do usuário.
+*/
+int dispAlteraVeiculo(){
+    int op = 0;
+
+    limpaTela();
+    cout << endl << "O que deseja alterar?" << endl << endl
+        << "#1. Renavam" << endl
+        << "#2. Data e hora de retirada" << endl
+        << "#3. Data e hora de entrega" << endl
+        << "#4. Loja de retirada" << endl 
+        << "#0. Sair" << endl << endl
+        << "> #";
+    cin >> op;
+    limpaBuffer();
+        
+    while (op < 0 || op > 4){
+        limpaTela();
+        cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
+        cout << endl << "O que deseja alterar?" << endl << endl
+            << "#1. Renavam" << endl
+            << "#2. Data e hora de retirada" << endl
+            << "#3. Data e hora de entrega" << endl
+            << "#4. Loja de retirada" << endl 
+            << "#0. Sair" << endl << endl
+            << endl << "Digite uma opcao valida!" << endl
+            << "> #";
+        cin >> op;
+        limpaBuffer();
+    }
+    
+    return op;
 }
 
 /*  A função alteraVeiculo solicita do usuário uma placa e faz uma busca dessa placa no vetor de veículos,
@@ -219,7 +253,7 @@ void listaVeiculos(vector<Veiculo> lista){
     for (size_t i = 0; i < lista.size(); i++){
         lista[i].dispListaVeiculos(i+1);
     }
-    getchar();
+    pausa_tela();
 }
 
 /*  A função buscaVeiculo solicita do usuário uma placa e faz uma busca dessa placa no vetor de veículos,
