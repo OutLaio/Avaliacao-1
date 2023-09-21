@@ -29,10 +29,12 @@ typedef struct T_cliente{
             << "CPF: " << getCPF() << endl
             << "Data de nascimento: " << this->DtNascimento.toString() << endl
             << "CNH: " << this->CNH << endl;
-        getchar();
+        pausa_tela();
     }
 
-    /*  A função dispListaCliente quando executada ira imprimir para o usuário os dados 
+    /**
+        @param id Inteiro que representa a posiçao do cliente no vetor cliente
+        @brief A função dispListaCliente quando executada ira imprimir para o usuário os dados 
         correspondentes a um cliente, sendo ela utilizada para listar todos os clientes. 
     */
     void dispListaClientes(int id){
@@ -103,7 +105,7 @@ void setCliente(vector<Cliente> *lista){
     limpaTela();
     cout << "********* Cadastro de Cliente *********" << endl << endl;
     cout << "Cliente cadastrado com sucesso!" << endl;
-    getchar();
+    pausa_tela();
 }
 
 /*  A função indexCliente executa uma busca no vetor de clientes por um determinado CPF,
@@ -117,9 +119,8 @@ int indexCliente(string CPF, vector<Cliente> lista){
         }
     }
     limpaTela();
-    cout << "CPF informado nao encontrado!" << endl
-         << "(Pressione qualquer tecla para continuar...)";
-    getchar();
+    cout << "CPF informado nao encontrado!" << endl;
+    pausa_tela();
     return -1;
 }
 
@@ -149,9 +150,44 @@ void deleteCliente(vector<Cliente> *lista){
     if(toupper(op) == 'S'){
         (*lista).erase((*lista).begin()+idCliente);
         cout << "Cliente removido com sucesso!";
-        getchar();
+        pausa_tela();
     }
     return;
+}
+
+/*  A função dispAlteraCliente imprime na tela do usuário as opções disponíveis relacionadas a alteração de cliente
+    e solicita que o usuário escolha uma, caso o usuário digite uma opção não disponível é solicitado
+    novamente ao usuário que escolha uma opção disponível, ao informar uma das opções a função retorna
+    a escolha do usuário.
+*/
+int dispAlteraCliente(){
+    int op = 0;
+
+    limpaTela();
+    cout << endl << "O que deseja alterar?" << endl << endl
+        << "#1. Nome" << endl
+        << "#2. Data de nascimento" << endl
+        << "#3. CNH" << endl 
+        << "#0. Sair" << endl << endl
+        << "> #";
+    cin >> op;
+    limpaBuffer();
+        
+    while (op < 0 || op > 3){
+        limpaTela();
+        cout << "********* LocaFINA S/A *********" << endl << endl << "\t";
+        cout << endl << "O que deseja alterar?" << endl << endl
+            << "#1. Nome" << endl
+            << "#2. Data de nascimento" << endl
+            << "#3. CNH" << endl 
+            << "#0. Sair" << endl << endl
+            << endl << "Digite uma opcao valida!" << endl
+            << "> #";
+        cin >> op;
+        limpaBuffer();
+    }
+
+    return op;
 }
 
 /*  A função alteraCliente solicita do usuário um CPF e faz uma busca desse CPF no vetor de clientes,
@@ -180,26 +216,26 @@ void alteraCliente(vector<Cliente> *lista){
     do{
         op = dispAlteraCliente();
         switch (op){
-        case 1:
-            cout << "Informe o novo nome do cliente:" << endl << "> ";
-            getline(cin, nome);
-            (*lista)[idCliente].Nome = nome;
-            break;
-        case 2:
-            cout << "Informe a nova data de nascimento:" << endl << "> ";
-            setData(&(*lista)[idCliente].DtNascimento);
-            while (!(*lista)[idCliente].DtNascimento.isData()){
-                cout << "Informe uma data valida:" << endl;
+            case 1:
+                cout << "Informe o novo nome do cliente:" << endl << "> ";
+                getline(cin, nome);
+                (*lista)[idCliente].Nome = nome;
+                break;
+            case 2:
+                cout << "Informe a nova data de nascimento:" << endl << "> ";
                 setData(&(*lista)[idCliente].DtNascimento);
-            }
-            break;
-        case 3:
-            cout << "Informe o novo numero da CNH:" << endl << "> ";
-            getline(cin, cnh);
-            (*lista)[idCliente].CNH = cnh;
-            break;
-        default:
-            break;
+                while (!(*lista)[idCliente].DtNascimento.isData()){
+                    cout << "Informe uma data valida:" << endl;
+                    setData(&(*lista)[idCliente].DtNascimento);
+                }
+                break;
+            case 3:
+                cout << "Informe o novo numero da CNH:" << endl << "> ";
+                getline(cin, cnh);
+                (*lista)[idCliente].CNH = cnh;
+                break;
+            default:
+                break;
         }
         if(op != 0){
             cout << "Alteracoes realizadas com sucesso!" << endl;
@@ -218,7 +254,7 @@ void listaClientes(vector<Cliente> lista){
     for (size_t i = 0; i < lista.size(); i++){
         lista[i].dispListaClientes(i+1);
     }
-    getchar();
+    pausa_tela();
 }
 
 /*  A função buscaCliente solicita do usuário um CPF e faz uma busca desse CPF no vetor de clientes,
