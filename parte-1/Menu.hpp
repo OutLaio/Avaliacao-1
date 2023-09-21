@@ -146,12 +146,13 @@ int dispMenuOcorrencia(){
             << "#3. Alterar Ocorrencia" << endl 
             << "#4. Listar Ocorrencias por Cliente" << endl
             << "#5. Listar Ocorrencias por Veiculos" << endl
+            << "#6. Registrar Ocorrência por Veículo" << endl
             << "#0. Sair" << endl << endl
             << endl << "Digite uma opcao valida!" << endl
             << "> # ";
         cin >> op;
         limpaBuffer();
-    }while(op < 0 || op > 5);
+    }while(op < 0 || op > 6);
 
     return op;
 }
@@ -271,6 +272,9 @@ void menuOcorrencia(vector<Locacao> *lista){
             break;
         case 5:
             listaOcorrenciaVeiculo(*lista);
+            break;
+        case 6:
+            setOcorrenciaByVeiculo(lista);
             break;
         default:
             break;
