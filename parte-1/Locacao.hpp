@@ -382,10 +382,8 @@ void setOcorrenciaByVeiculo(vector<Locacao> *lista){
 
     for (size_t i = 0; i < lista->size(); i++){
         if((*lista)[i].veiculo.Placa.compare(placa) == 0){
-            if((*lista)[i].ocorrencia.ativa == 'n'){
-                k++;
-                (*lista)[i].ocorrencia = nova;
-            }
+            k++;
+            (*lista)[i].ocorrencia = nova;
         }
     }
     if(k == 0){
