@@ -15,22 +15,24 @@ using namespace std;
 // Definiu-se a struct a Alocação contendo os atributos necessários a ela, além de algumas funções próprias da struct.
 typedef struct T_locacao{
     char Realizada = 'n';
-    char Entrega = 'n';
+    char Entrega = 'x';
     Data Dt_HoraRetirada;
     Data Dt_HoraEntrega;
     Cliente cliente;
     Veiculo veiculo;
     Ocorrencia ocorrencia;
 
-    void dispDadosOcorrencia(){
+    void dispDadosLocacao(){
         limpaTela();
         cout << "********* Dados da Locacao *********" << endl << endl
             << "Data da retirada: " << this->Dt_HoraRetirada.getHora()
             << " " << this->Dt_HoraRetirada.toString() << endl
-            << "Situacao da retirada: " << this->getRetirada() << endl << endl
-            << "Data da entrega: " << this->Dt_HoraEntrega.getHora()
-            << " " << this->Dt_HoraEntrega.toString() << endl
-            << "Situacao da entrega: " << this->getEntrega() << endl << endl
+            << "Situacao da retirada: " << this->getRetirada() << endl << endl;
+        if(this->Entrega != 'x'){
+            cout << "Data da entrega: " << this->Dt_HoraEntrega.getHora()
+                << " " << this->Dt_HoraEntrega.toString() << endl;
+        }
+        cout << "Situacao da entrega: " << this->getEntrega() << endl << endl
             << "=========     Veiculo      =========" << endl
             << "Placa do veiculo: " << this->veiculo.Placa << endl
             << "Numero do renavan: " << this->veiculo.Renavan << endl
@@ -42,14 +44,16 @@ typedef struct T_locacao{
         getchar();
     }
 
-    void dispListaOcorrencia(int id){
-        cout << endl << "******* Dados da Ocorrencia #" << id << " ********" << endl << endl
+    void dispListaLocacao(int id){
+        cout << endl << "******* Dados da Locacao #" << id << " ********" << endl << endl
             << "Data da retirada: " << this->Dt_HoraRetirada.getHora()
             << " " << this->Dt_HoraRetirada.toString() << endl
-            << "Situacao da retirada: " << this->getRetirada() << endl << endl
-            << "Data da entrega: " << this->Dt_HoraEntrega.getHora()
-            << " " << this->Dt_HoraEntrega.toString() << endl
-            << "Situacao da entrega: " << this->getEntrega() << endl << endl
+            << "Situacao da retirada: " << this->getRetirada() << endl << endl;
+        if(this->Entrega != 'x'){
+            cout << "Data da entrega: " << this->Dt_HoraEntrega.getHora()
+                << " " << this->Dt_HoraEntrega.toString() << endl;
+        }
+        cout << "Situacao da entrega: " << this->getEntrega() << endl << endl
             << "=========     Veiculo      =========" << endl
             << "Placa do veiculo: " << this->veiculo.Placa << endl
             << "Numero do renavan: " << this->veiculo.Renavan << endl
@@ -148,7 +152,7 @@ void setLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veiculo
     } while (tolower(op) != 's' && tolower(op) != 'n');
     
     novo.Realizada = op;
-
+    
     (*lista).push_back(novo);
     cout << "********* Cadastro de Locacao *********" << endl << endl;
     cout << "Locacao cadastrada com sucesso!" << endl;
@@ -182,7 +186,7 @@ void deleteLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veic
     for(size_t i=0; i<(*lista).size(); i++){
         if(lista->at(i).veiculo.Placa==placa){
             cout << "Locacao " << i << endl;
-            cout << endl << "CPF do clinte: "
+            cout << "CPF do clinte: "
                 << lista->at(i).cliente.CPF << endl
                 << "Renavan do veiculo: "
                 << lista->at(i).veiculo.Renavan << endl << endl;
@@ -215,6 +219,8 @@ void deleteLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veic
 void alteraLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veiculo> veiculos){
     string placa;
     string CPF_t;
+    int idCliente;
+    char op;
 
     limpaTela();
     cout << "********* ALtera Locacao *********" << endl << endl;
@@ -223,7 +229,7 @@ void alteraLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veic
 
     while(!hasPlaca(placa, veiculos)){
         char op;
-        cout << "Placa nao cadastrada no sistema!" << endl;
+        cout << endl << "Placa nao cadastrada no sistema!" << endl;
         cout << "Deseja tentar novamente? ([S]im / [N]ao)" << endl << ">";
         cin >> op;
         limpaBuffer();
@@ -234,12 +240,14 @@ void alteraLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veic
         cout << "Informe a placa do veiculo: ";
         getline(cin, placa);
     }
-    cout << endl << "Lista de todos os passageiros que tem reserva com esse veiculo de placa: " << placa << endl;
+    limpaTela();
+    cout << "********* ALtera Locacao *********" << endl << endl;
+    cout << "Lista de todos os passageiros que tem reserva com esse veiculo de placa: " << placa << endl;
     for(size_t i=0; i<(*lista).size(); i++){
         if(lista->at(i).veiculo.Placa==placa){
-            cout << "Cliente locacao: " << i << endl;
+            cout << endl << "Cliente locacao: " << i+1 << endl;
             cout << endl << "CPF do clinte: "
-                << lista->at(i).cliente.CPF << endl
+                << lista->at(i).cliente.getCPF() << endl
                 << "Nome do cliente: "
                 << lista->at(i).cliente.Nome << endl;
             }
@@ -255,43 +263,44 @@ void alteraLocacao(vector<Locacao> *lista, vector<Cliente> clientes, vector<Veic
         if(toupper(op) != 'S')
             return;
         limpaTela();
-        cout << "********* Cadastro de Locacao *********" << endl << endl;
+        cout << "********* Altera Locacao *********" << endl << endl;
         cout << "Informe o CPF do cliente: ";
         getline(cin, CPF_t);
     }
 
-    for(size_t i=0; i<(*lista).size(); i++){
-        if(lista->at(i).cliente.CPF==CPF_t){
-            cout << "Digite uma nova data de entrega: " << endl;
-            setData(&(*lista).at(i).Dt_HoraEntrega);
-        }
+    idCliente = indexCliente(CPF_t, clientes);
+    if(idCliente < 0)
+        return;
+
+    cout << endl << "Digite uma nova data de entrega: " << endl;
+    setHora(&(*lista).at(idCliente).Dt_HoraEntrega);
+    while(!(*lista).at(idCliente).Dt_HoraEntrega.isHora()){ // Caso o usuário informe uma hora inválida, será solicitado um novo horario
+        cout << "Informe uma hora valida:" << endl;
+        setHora(&(*lista).at(idCliente).Dt_HoraEntrega);
     }
+    setData(&(*lista).at(idCliente).Dt_HoraEntrega);
+    while(!(*lista).at(idCliente).Dt_HoraEntrega.isData()){ // Caso o usuário informe uma data inválida, será solicitado uma nova data
+        cout << "Informe uma data valida:" << endl;
+        setData(&(*lista).at(idCliente).Dt_HoraEntrega);
+    }
+
+    do{
+        limpaTela();
+        cout << "********* Altera Locacao *********" << endl << endl;
+        cout << "A entrega ja foi realizada? ([S]im / [N]ao)" << endl;
+        cin >> op;
+        limpaBuffer();
+    } while (tolower(op) != 's' && tolower(op) != 'n');
+
+    (*lista).at(idCliente).Entrega = op;
+
+    return;
 }
 
 void listaLocacao(vector<Locacao> lista){
     limpaTela();
-    cout << "Lista de locacoes realizadas: " << endl;
-    if(lista.size() == 0){
-        cout << "Nenhuma locação registrada!" << endl;
-        pausa_tela();
-        return;
-    }
-    for(size_t i=0; i<lista.size(); i++){
-        if(lista.at(i).Realizada=='s'){
-            cout << "Nome do cliente: " << lista.at(i).cliente.Nome << endl;
-            cout << "Renavan do carro: " << lista.at(i).veiculo.Renavan << endl;
-            cout << "Dt_Hora Retirada: " << lista.at(i).Dt_HoraRetirada.toString() << endl;
-            cout << "Dt_Hora Entrega: " << lista.at(i).Dt_HoraEntrega.toString() << endl;
-        }
-    }
-    cout << "Lista de locacoes ainda não realizadas: " << endl;
-    for(size_t i=0; i<lista.size(); i++){
-        if(lista.at(i).Realizada=='n'){
-            cout << "Nome do cliente: " << lista.at(i).cliente.Nome << endl;
-            cout << "Renavan do carro: " << lista.at(i).veiculo.Renavan << endl;
-            cout << "Dt_Hora Retirada: " << lista.at(i).Dt_HoraRetirada.toString() << endl;
-            cout << "Dt_Hora Entrega: " << lista.at(i).Dt_HoraEntrega.toString() << endl;
-        }
+    for (size_t i = 0; i < lista.size(); i++){
+        lista[i].dispListaLocacao(i+1);
     }
     pausa_tela();
 }
@@ -484,8 +493,10 @@ void listaOcorrenciaCliente(vector<Locacao> lista){
 
     for (size_t i = 0; i < lista.size(); i++){
         if(lista[i].cliente.CPF.compare(cpf) == 0){
-            k++;
-            lista[i].ocorrencia.dispListaOcorrencia(k);
+            if(lista[i].ocorrencia.ativa == 's'){
+                k++;
+                lista[i].ocorrencia.dispListaOcorrencia(k);
+            }
         }
     }
     if(k == 0){
